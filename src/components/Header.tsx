@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
-import "./Header.css"; // <-- We'll add CSS animation here
 
 export const Header: React.FC = () => {
-  const [theme, setTheme] = useState<"caramellatte" | "forest">("caramellatte");
+  const [theme, setTheme] = useState<"light" | "dark">("light");
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === "caramellatte" ? "forest" : "caramellatte"));
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 
   return (
@@ -34,7 +33,15 @@ export const Header: React.FC = () => {
           </button>
         </div>
         <div className="flex-1">
-          <a className="btn btn-ghost text-xl">daisyUI</a>
+
+<div className="flex-1">
+    <a href="#header" className="btn btn-ghost">Header</a>
+  <a href="#about" className="btn btn-ghost">About</a>
+  <a href="#portfolio" className="btn btn-ghost">Portfolio</a>
+  <a href="#pricing" className="btn btn-ghost">Pricing</a>
+  <a href="#contact" className="btn btn-ghost">Contact</a>
+</div>
+
         </div>
         <div className="flex-none">
           {/* THEME SWITCHER */}
@@ -61,7 +68,7 @@ export const Header: React.FC = () => {
             <input
               type="checkbox"
               className="toggle"
-              checked={theme === "forest"}
+              checked={theme === "dark"}
               onChange={toggleTheme}
             />
 
@@ -80,15 +87,18 @@ export const Header: React.FC = () => {
       </div>
 
       {/* HERO SECTION with bouncing circles */}
-      <div className="hero min-h-screen bg-base-200 relative overflow-hidden">
-        <div className={`bouncing-bg ${theme}`} />
-
-        <div className="hero-content text-center text-neutral-content absolute inset-0 flex items-center justify-center">
-          <h1 className="text-5xl font-bold">
-            Welcome to <span className="capitalize">{theme}</span> mode
-          </h1>
-        </div>
-      </div>
+<div className="hero bg-base-200 min-h-screen">
+  <div className="hero-content text-center">
+    <div className="max-w-md">
+      <h1 className="text-5xl font-bold">Hello there</h1>
+      <p className="py-6">
+        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
+        quasi. In deleniti eaque aut repudiandae et a id nisi.
+      </p>
+      <button className="btn btn-primary">Get Started</button>
+    </div>
+  </div>
+</div>
     </>
   );
 };

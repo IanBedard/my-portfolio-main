@@ -36,7 +36,7 @@ export const AnimatedCursor = () => {
       {/* Hide default cursor */}
       <style>{`
         * {
-          cursor: none !important;
+          cursor: none;
         }
       `}</style>
       
