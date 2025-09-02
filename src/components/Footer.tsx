@@ -27,7 +27,7 @@ export const Footer = () => {
       </div>
       <div className="container mx-auto">
         <div className="border-t border-base-300 pt-8 text-center">
-          <p>© 2025 Divi Expert. All rights reserved.</p>
+          <p>© 2025 Ian Bedard. All rights reserved.</p>
         </div>
       </div>
     </footer>
