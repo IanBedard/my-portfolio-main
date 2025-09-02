@@ -29,11 +29,11 @@ export const Showcase = () => {
         </div>
 
         {/* Masonry grid */}
-        <div className="columns-2 sm:columns-2 md:columns-3 gap-2 space-y-2">
+        <div className="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4">
           {images.map((img, i) => (
             <div
               key={i}
-              className="relative cursor-pointer group overflow-hidden shadow-lg"
+              className="relative cursor-pointer group overflow-hidden rounded-2xl shadow-lg"
               onClick={() => {
                 setIndex(i);
                 setOpen(true);
