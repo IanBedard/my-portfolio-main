@@ -3,10 +3,11 @@ import { useNavigate, useParams } from "react-router-dom";
 
 interface GalleryImage {
   id: number;
-  src: string;
-  title: string;
-  category: string;
-  link: string;
+  src?: string;  // Make src optional
+  title?: string; // Make title optional
+  category?: string; // Make category optional
+  link?: string; // Make link optional
+  text?: string; // Add text property
   aspectRatio?: 'portrait' | 'landscape';
 }
 
@@ -78,13 +79,13 @@ const ImageGallery: React.FC = () => {
 
   useEffect(() => {
     const loadImages = async () => {
-      // Get images for the selected category
       const categoryImages = galleryImages[category as keyof typeof galleryImages] || [];
       
       const imagesWithAspectRatio = await Promise.all(
         categoryImages.map(async (image) => ({
           ...image,
-          aspectRatio: await checkImageAspectRatio(image.src)
+          // Only check aspect ratio if src exists
+          aspectRatio: image.src ? await checkImageAspectRatio(image.src) : 'landscape'
         }))
       );
 
@@ -92,41 +93,47 @@ const ImageGallery: React.FC = () => {
     };
 
     loadImages();
-  }, [category]); // Re-run when category changes
+  }, [category]);
 
-  const handleImageClick = (link: string) => {
-    navigate(link);
+  const handleImageClick = (link?: string) => {
+    if (link) navigate(link);
   };
 
   return (
     <div className="min-h-screen bg-white py-8 px-4 pt-25">
       <div className="max-w-7xl mx-auto">
-
-        
         <div className="grid gap-2">
           {images.map((image) => (
-            <div
-              key={image.id}
-              className={`relative cursor-pointer ${
-                image.aspectRatio === 'portrait' ? 'col-span-6 md:col-span-6' : 'col-span-12'
-              }`}
-              onClick={() => handleImageClick(image.link)}
-            >
-              <div className="group relative overflow-hidden">
-                <img
-                  src={image.src}
-                  alt={image.title}
-                  className={`w-full h-auto object-cover ${
-                    image.aspectRatio === 'portrait' ? 'max-h-[90vh]' : 'max-h-[100vh]'
-                  }`}
-                />
-                <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition-opacity duration-300 overlay" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 text-white opacity-0 group-hover:opacity-100 transform translate-y-full group-hover:translate-y-0 transition-all duration-300 bg-gradient-to-t from-black/70 to-transparent">
-                  <h3 className="text-lg font-light">{image.title}</h3>
-                  <p className="text-sm opacity-75">{image.category}</p>
-                </div>
+            image.text ? (
+              <div key={image.id} className="col-span-12 py-8 px-4 text-center">
+                <p className="text-2xl font-light text-gray-700">{image.text}</p>
               </div>
-            </div>
+            ) : (
+              <div
+                key={image.id}
+                className={`relative cursor-pointer ${
+                  image.aspectRatio === 'portrait' ? 'col-span-6 md:col-span-6' : 'col-span-12'
+                }`}
+                onClick={() => handleImageClick(image.link)}
+              >
+                {image.src && (
+                  <div className="group relative overflow-hidden">
+                    <img
+                      src={image.src}
+                      alt={image.title}
+                      className={`w-full h-auto object-cover ${
+                        image.aspectRatio === 'portrait' ? 'max-h-[90vh]' : 'max-h-[100vh]'
+                      }`}
+                    />
+                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition-opacity duration-300 overlay" />
+                    <div className="absolute bottom-0 left-0 right-0 p-4 text-white opacity-0 group-hover:opacity-100 transform translate-y-full group-hover:translate-y-0 transition-all duration-300 bg-gradient-to-t from-black/70 to-transparent">
+                      <h3 className="text-lg font-light">{image.title}</h3>
+                      <p className="text-sm opacity-75">{image.category}</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )
           ))}
         </div>
       </div>

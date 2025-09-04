@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ImageGallery from "./components/ImageGallery";
 import { Showcase } from './components/Showcase';
