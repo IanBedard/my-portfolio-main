@@ -6,37 +6,37 @@ const galleries = [
     id: 1,
     src: "/images/1.jpg",
     title: "Urbanscapes",
-    link: "/architecture"
+    link: "/gallery/urbanscapes" // Updated path
   },
   {
     id: 2,
     src: "/images/2.jpg",
     title: "Landscapes",
-    link: "/landscapes"
+    link: "/gallery/landscapes" // Updated path
   },
   {
     id: 3,
     src: "/images/3.jpg",
     title: "Macros",
-    link: "/urbanscapes"
+    link: "/gallery/macro" // Updated path
   },
   {
     id: 4,
     src: "/images/4.jpg",
     title: "Nature",
-    link: "/street"
+    link: "/gallery/nature" // Updated path
   },
   {
     id: 5,
     src: "/images/5.jpg",
     title: "Portraits",
-    link: "/portraits"
+    link: "/gallery/portraits" // Updated path
   },
   {
     id: 6,
     src: "/images/6.jpg",
     title: "Wildlife Gallery",
-    link: "/wildlife"
+    link: "/gallery/wildlife" // Updated path
   }
 ];
 

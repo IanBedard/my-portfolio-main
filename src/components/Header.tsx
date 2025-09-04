@@ -1,10 +1,19 @@
 import React from 'react';
-
+import { useNavigate } from 'react-router-dom';
 
 export const Header = () => {
+  const navigate = useNavigate();
+
   return (
-<div className="navbar bg-base-100 shadow-sm ont-serif bg-white flex items-center justify-center">
-  <a className="btn btn-ghost text-xl">Ian Bedard</a>
-</div>
+    <header className="fixed top-0 left-0 w-full z-10 bg-white/80 backdrop-blur-sm shadow-sm">
+      <div className="px-8 py-4">
+        <h1 
+          className="text-2xl font-light tracking-wider cursor-pointer hover:text-gray-600 transition-colors"
+          onClick={() => navigate('/')}
+        >
+          IAN BEDARD
+        </h1>
+      </div>
+    </header>
   );
-}; 
+};

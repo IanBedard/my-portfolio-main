@@ -10,20 +10,12 @@ const App = () => {
   return (
     <Router>
       <div className="min-h-screen" data-theme="emerald">
-     
         <Header />
-      <AnimatedCursor />
+        <AnimatedCursor />
         <Routes>
-      
           <Route path="/" element={<Showcase />} />
-          <Route path="/gallery" element={<ImageGallery />} />
-          <Route path="/architecture" element={<ImageGallery />} />
-          <Route path="/landscapes" element={<ImageGallery />} />
-          <Route path="/urbanscapes" element={<ImageGallery />} />
-          <Route path="/street" element={<ImageGallery />} />
-          <Route path="/portraits" element={<ImageGallery />} />
-          <Route path="/wildlife" element={<ImageGallery />} />
-        </Routes>  
+          <Route path="/gallery/:category" element={<ImageGallery />} />
+        </Routes>
         <Footer />
       </div>
     </Router>

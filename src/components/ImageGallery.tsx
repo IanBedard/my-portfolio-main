@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface GalleryImage {
   id: number;
@@ -10,8 +10,57 @@ interface GalleryImage {
   aspectRatio?: 'portrait' | 'landscape';
 }
 
+const galleryImages = {
+  urbanscapes: [
+    {
+      id: 1,
+      src: "/images/urbanscapes/1.jpg",
+      title: "City View",
+      category: "Urbanscapes",
+      link: "/urbanscapes"
+    },
+    // ... more urbanscape images
+  ],
+  landscapes: [
+    {
+      id: 1,
+      src: "/images/landscapes/1.jpg",
+      title: "Mountain Vista",
+      category: "Landscapes",
+      link: "/landscapes"
+    },
+    // ... more landscape images
+  ],portraits: [
+    {
+      id: 1,
+      src: "/images/portraits/1.jpg",
+      title: "Mountain Vista",
+      category: "Portraits",
+      link: "/portraits"
+    },{
+      id: 2,
+      src: "/images/portraits/2.jpg",
+      title: "Mountain Vista",
+      category: "Portraits",
+      link: "/portraits"
+    },{
+      id: 3,
+      src: "/images/portraits/3.jpg",
+      title: "Mountain Vista",
+      category: "Portraits",
+      link: "/portraits"
+    }, {
+      id: 4,
+      text: "Discover the beauty of natural landscapes",
+    },
+   
+  ],
+  // Add other categories following the same pattern
+};
+
 const ImageGallery: React.FC = () => {
   const navigate = useNavigate();
+  const { category } = useParams<{ category: string }>();
   const [images, setImages] = useState<GalleryImage[]>([]);
 
   const checkImageAspectRatio = (src: string): Promise<'portrait' | 'landscape'> => {
@@ -29,67 +78,11 @@ const ImageGallery: React.FC = () => {
 
   useEffect(() => {
     const loadImages = async () => {
-      const baseImages: GalleryImage[] = [
-        {
-          id: 1,
-          src: "/images/1.jpg",
-          title: "Modern Architecture",
-          category: "Architecture",
-          link: "/architecture"
-        },
-        {
-          id: 2,
-          src: "/images/2.jpg",
-          title: "Mountain Vista",
-          category: "Landscapes",
-          link: "/landscapes"
-        },
-        {
-          id: 3,
-          src: "/images/3.jpg",
-          title: "City Lights",
-          category: "Urbanscapes",
-          link: "/urbanscapes"
-        },
-        {
-          id: 4,
-          src: "/images/4.jpg",
-          title: "Street Life",
-          category: "Street",
-          link: "/street"
-        },
-        {
-          id: 5,
-          src: "/images/5.jpg",
-          title: "Portrait Study",
-          category: "Portraits",
-          link: "/portraits"
-        },
-        {
-          id: 6,
-          src: "/images/6.jpg",
-          title: "Wild Nature",
-          category: "Wildlife",
-          link: "/wildlife"
-        },
-        {
-          id: 7,
-          src: "/images/7.jpg",
-          title: "Historic Buildings",
-          category: "Architecture",
-          link: "/architecture"
-        },
-        {
-          id: 8,
-          src: "/images/8.jpg",
-          title: "Seascape",
-          category: "Landscapes",
-          link: "/landscapes"
-        }
-      ];
-
+      // Get images for the selected category
+      const categoryImages = galleryImages[category as keyof typeof galleryImages] || [];
+      
       const imagesWithAspectRatio = await Promise.all(
-        baseImages.map(async (image) => ({
+        categoryImages.map(async (image) => ({
           ...image,
           aspectRatio: await checkImageAspectRatio(image.src)
         }))
@@ -99,16 +92,16 @@ const ImageGallery: React.FC = () => {
     };
 
     loadImages();
-  }, []);
+  }, [category]); // Re-run when category changes
 
   const handleImageClick = (link: string) => {
     navigate(link);
   };
 
   return (
-    <div className="min-h-screen bg-white py-8 px-4">
+    <div className="min-h-screen bg-white py-8 px-4 pt-25">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-light text-gray-900 mb-8">Featured Gallery</h1>
+
         
         <div className="grid gap-2">
           {images.map((image) => (
@@ -124,7 +117,7 @@ const ImageGallery: React.FC = () => {
                   src={image.src}
                   alt={image.title}
                   className={`w-full h-auto object-cover ${
-                    image.aspectRatio === 'portrait' ? 'max-h-[80vh]' : 'max-h-[60vh]'
+                    image.aspectRatio === 'portrait' ? 'max-h-[90vh]' : 'max-h-[100vh]'
                   }`}
                 />
                 <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition-opacity duration-300 overlay" />
@@ -141,5 +134,5 @@ const ImageGallery: React.FC = () => {
   );
 };
 
-export default ImageGallery; 
+export default ImageGallery;
 
