@@ -4,6 +4,7 @@ import ImageGallery from "./components/ImageGallery";
 import { Showcase } from './components/Showcase';
 import { AnimatedCursor } from './components/AnimatedCursor';
 import { Header } from './components/Header';
+import { Footer } from './components/Footer';
 
 const App = () => {
   return (
@@ -11,7 +12,7 @@ const App = () => {
       <div className="min-h-screen" data-theme="emerald">
      
         <Header />
-      
+      <AnimatedCursor />
         <Routes>
       
           <Route path="/" element={<Showcase />} />
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/portraits" element={<ImageGallery />} />
           <Route path="/wildlife" element={<ImageGallery />} />
         </Routes>  
+        <Footer />
       </div>
     </Router>
   );
