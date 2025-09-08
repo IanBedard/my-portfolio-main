@@ -14,12 +14,12 @@ export const Nav = () => {
 
   return (
     <header className="fixed top-0 left-0 w-full z-10 bg-white/80 backdrop-blur-sm shadow-sm">
-      <div className="px-8 py-4 flex justify-between items-center">
+      <div className="px-8 py-4 flex justify-between items-center ml-[10%] mr-[10%]">
         <h1 
           className="text-2xl font-light tracking-wider cursor-pointer hover:text-gray-600 transition-colors"
           onClick={() => navigate('/')}
         >
-          IAN BEDARD
+          IB Photography
         </h1>
 
         <nav className="flex gap-6">
