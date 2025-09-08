@@ -4,38 +4,38 @@ import { useNavigate } from "react-router-dom";
 const galleries = [
   {
     id: 1,
-    src: "/images/1.jpg",
-    title: "Urbanscapes",
+    src: "/images/6.jpg",
+    title: "Nature",
     link: "/gallery/urbanscapes" // Updated path
   },
   {
     id: 2,
-    src: "/images/2.jpg",
-    title: "Landscapes",
+    src: "/images/7.jpg",
+    title: "Night",
     link: "/gallery/landscapes" // Updated path
   },
   {
     id: 3,
-    src: "/images/3.jpg",
-    title: "Macros",
+    src: "/images/portraits/3.jpg",
+    title: "Macro",
     link: "/gallery/macro" // Updated path
   },
   {
     id: 4,
-    src: "/images/4.jpg",
-    title: "Nature",
+    src: "/images/portraits/8.jpg",
+    title: "Urban",
     link: "/gallery/nature" // Updated path
   },
   {
     id: 5,
-    src: "/images/5.jpg",
-    title: "Portraits",
+    src: "/images/hdr.jpg",
+    title: "HDR",
     link: "/gallery/portraits" // Updated path
   },
   {
     id: 6,
-    src: "/images/6.jpg",
-    title: "Wildlife Gallery",
+    src: "/images/2.jpg",
+    title: "MISC",
     link: "/gallery/wildlife" // Updated path
   }
 ];
@@ -44,7 +44,7 @@ export const Showcase = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="w-full h-screen bg-white flex items-center justify-center">
+    <section className="w-full h-200 bg-white flex items-center justify-center">
       <div className="w-4/5 h-5/6">
         <div className="grid grid-cols-2 gap-4 h-full">
           {galleries.map((gallery) => (
@@ -71,7 +71,7 @@ export const Showcase = () => {
                   flex items-center justify-center "
                 >
                   <h3 
-                    className="text-4xl font-bold tracking-[0.4em] leading-none"
+                    className="text-3xl font-bold tracking-[0.4em] leading-none"
                     style={{ 
                       writingMode: 'vertical-lr', 
                       textOrientation: 'upright'

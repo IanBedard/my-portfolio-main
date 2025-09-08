@@ -1,19 +1,13 @@
-
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const isShowcase = location.pathname === '/';
 
   return (
-    <header className="fixed top-0 left-0 w-full z-10 bg-white/80 backdrop-blur-sm shadow-sm">
-      <div className="px-8 py-4">
-        <h1 
-          className="text-2xl font-light tracking-wider cursor-pointer hover:text-gray-600 transition-colors"
-          onClick={() => navigate('/')}
-        >
-          IAN BEDARD
-        </h1>
-      </div>
-    </header>
+<section className="w-full bg-white flex pl-36 pt-30 pr-36">
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore, sequi dolor magni animi similique vero consequuntur maiores possimus, nesciunt velit repellat. Debitis rem nemo quis quod unde, odit ullam vel!</p>
+</section>
   );
 };
