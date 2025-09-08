@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 
 interface GalleryImage {
   id: number;
@@ -32,37 +34,80 @@ const galleryImages = {
     },
     // ... more landscape images
   ],portraits: [
-    {
-      id: 1,
+   {
+      id: 2,
       src: "/images/portraits/1.jpg",
       title: "Mountain Vista",
       category: "Portraits",
       link: "/portraits"
     },{
-      id: 2,
+      id: 3,
       src: "/images/portraits/2.jpg",
       title: "Mountain Vista",
       category: "Portraits",
       link: "/portraits"
     },{
-      id: 3,
+      id: 4,
       src: "/images/portraits/3.jpg",
       title: "Mountain Vista",
       category: "Portraits",
       link: "/portraits"
-    }, {
-      id: 4,
+    },  {
+      id: 1,
       text: "Discover the beauty of natural landscapes",
-    },
+    },{
+      id: 5,
+      src: "/images/portraits/4.jpg",
+      title: "Mountain Vista",
+      category: "Portraits",
+      link: "/portraits"
+    },{
+      id: 6,
+      src: "/images/portraits/5.jpg",
+      title: "Mountain Vista",
+      category: "Portraits",
+      link: "/portraits"
+    },{
+      id: 7,
+      src: "/images/portraits/6.jpg",
+      title: "Mountain Vista",
+      category: "Portraits",
+      link: "/portraits"
+    },  {
+      id: 1,
+      text: "Discover the beauty of natural landscapes",
+    },{
+      id: 8,
+      src: "/images/portraits/7.jpg",
+      title: "Mountain Vista",
+      category: "Portraits",
+      link: "/portraits"
+    },{
+      id: 9,
+      src: "/images/portraits/8.jpg",
+      title: "Mountain Vista",
+      category: "Portraits",
+      link: "/portraits"
+    }
    
   ],
   // Add other categories following the same pattern
+};
+
+const getCategoryTitle = (category: string | undefined): string => {
+  if (!category) return '';
+  
+  // Capitalize first letter and handle special cases
+  const formatted = category.charAt(0).toUpperCase() + category.slice(1);
+  return formatted === 'Urbanscapes' ? 'Urban Landscapes' : formatted;
 };
 
 const ImageGallery: React.FC = () => {
   const navigate = useNavigate();
   const { category } = useParams<{ category: string }>();
   const [images, setImages] = useState<GalleryImage[]>([]);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   const checkImageAspectRatio = (src: string): Promise<'portrait' | 'landscape'> => {
     return new Promise((resolve) => {
@@ -95,13 +140,34 @@ const ImageGallery: React.FC = () => {
     loadImages();
   }, [category]);
 
-  const handleImageClick = (link?: string) => {
-    if (link) navigate(link);
+  const handleImageClick = (event: React.MouseEvent, image: GalleryImage) => {
+    event.preventDefault();
+    event.stopPropagation();
+    if (image.src) {
+      // Find the correct index in the filtered slides array
+      const slideIndex = slides.findIndex(slide => slide.src === image.src);
+      if (slideIndex !== -1) {
+        setLightboxIndex(slideIndex);
+        setLightboxOpen(true);
+      }
+    }
   };
+
+  const slides = images
+    .filter(image => image.src) // Only include items with src
+    .map(image => ({
+      src: image.src as string,
+      alt: image.title,
+    }));
 
   return (
     <div className="min-h-screen bg-white py-8 px-4 pt-25">
       <div className="max-w-7xl mx-auto">
+        {/* Add the heading here */}
+        <h1 className="text-4xl font-light text-gray-900 mb-12 tracking-wider">
+          {getCategoryTitle(category)}
+        </h1>
+
         <div className="grid gap-2">
           {images.map((image) => (
             image.text ? (
@@ -114,7 +180,7 @@ const ImageGallery: React.FC = () => {
                 className={`relative cursor-pointer ${
                   image.aspectRatio === 'portrait' ? 'col-span-6 md:col-span-6' : 'col-span-12'
                 }`}
-                onClick={() => handleImageClick(image.link)}
+                onClick={(e) => handleImageClick(e, image)}
               >
                 {image.src && (
                   <div className="group relative overflow-hidden">
@@ -122,7 +188,7 @@ const ImageGallery: React.FC = () => {
                       src={image.src}
                       alt={image.title}
                       className={`w-full h-auto object-cover ${
-                        image.aspectRatio === 'portrait' ? 'max-h-[90vh]' : 'max-h-[100vh]'
+                        image.aspectRatio === 'portrait' ? 'max-h-[70vh]' : 'max-h-[100vh]'
                       }`}
                     />
                     <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition-opacity duration-300 overlay" />
@@ -137,6 +203,13 @@ const ImageGallery: React.FC = () => {
           ))}
         </div>
       </div>
+
+      <Lightbox
+        open={lightboxOpen}
+        close={() => setLightboxOpen(false)}
+        index={lightboxIndex}
+        slides={slides}
+      />
     </div>
   );
 };

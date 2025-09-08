@@ -35,9 +35,7 @@ export const AnimatedCursor = () => {
     < >
       {/* Hide default cursor */}
       <style>{`
-        * {
-          cursor: none;
-        }
+     
       `}</style>
       
       {/* Custom cursor with negative effect */}
