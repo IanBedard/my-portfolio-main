@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
@@ -103,7 +103,7 @@ const getCategoryTitle = (category: string | undefined): string => {
 };
 
 const ImageGallery: React.FC = () => {
-  const navigate = useNavigate();
+
   const { category } = useParams<{ category: string }>();
   const [images, setImages] = useState<GalleryImage[]>([]);
   const [lightboxOpen, setLightboxOpen] = useState(false);
