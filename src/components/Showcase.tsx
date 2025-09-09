@@ -44,9 +44,9 @@ export const Showcase = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="w-full h-200 bg-white flex items-center justify-center">
+    <section className="w-full h-150 bg-white flex items-center justify-center">
       <div className="w-4/5 h-5/6">
-        <div className="grid grid-cols-2 gap-4 h-full">
+        <div className="grid grid-cols-2 gap-4 h-full ">
           {galleries.map((gallery) => (
             <div
               key={gallery.id}
