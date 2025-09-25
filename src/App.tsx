@@ -5,7 +5,7 @@ import { Showcase } from './components/Showcase';
 import { AnimatedCursor } from './components/AnimatedCursor';
 import {Nav} from './components/Nav';
 import { Header } from './components/Header';
-import { Footer } from './components/Footer';
+
 
 const App = () => {
   return (
@@ -20,7 +20,7 @@ const App = () => {
           <Route path="/" element={<Showcase />} />
           <Route path="/gallery/:category" element={<ImageGallery />} />
         </Routes>
-        <Footer />
+
       </div>
     </Router>
   ); 

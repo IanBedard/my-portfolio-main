@@ -44,7 +44,7 @@ export const Showcase = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="w-full h-150 bg-white flex items-center justify-center">
+    <section className="w-full pt-10 pb-10 bg-white flex items-center justify-center">
       <div className="w-4/5 h-5/6">
         <div className="grid grid-cols-2 gap-4 h-full ">
           {galleries.map((gallery) => (
@@ -53,7 +53,7 @@ export const Showcase = () => {
               className="w-full h-full cursor-pointer flex items-center justify-center"
               onClick={() => navigate(gallery.link)}
             >
-              <div className="group relative w-full h-full overflow-hidden">
+              <div className="group relative w-full h-150 overflow-hidden">
                 <img
                   src={gallery.src}
                   alt={gallery.title}

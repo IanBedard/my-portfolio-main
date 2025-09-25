@@ -55,6 +55,7 @@ const galleryImages = {
     },  {
       id: 1,
       text: "Discover the beauty of natural landscapes",
+      link: "/portraits"
     },{
       id: 5,
       src: "/images/portraits/4.jpg",
@@ -76,6 +77,7 @@ const galleryImages = {
     },  {
       id: 1,
       text: "Discover the beauty of natural landscapes",
+      link: "/portraits"
     },{
       id: 8,
       src: "/images/portraits/7.jpg",
@@ -163,12 +165,13 @@ const ImageGallery: React.FC = () => {
   return (
     <div className="min-h-screen bg-white py-8 px-4 pt-25">
       <div className="max-w-7xl mx-auto">
-        {/* Add the heading here */}
+   
         <h1 className="text-4xl font-light text-gray-900 mb-12 tracking-wider">
           {getCategoryTitle(category)}
         </h1>
 
-        <div className="grid gap-2">
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
           {images.map((image) => (
             image.text ? (
               <div key={image.id} className="col-span-12 py-8 px-4 text-center">
@@ -187,11 +190,11 @@ const ImageGallery: React.FC = () => {
                     <img
                       src={image.src}
                       alt={image.title}
-                      className={`w-full h-auto object-cover ${
+                      className={`w-full  min-h-[100vh] object-cover ${
                         image.aspectRatio === 'portrait' ? 'max-h-[70vh]' : 'max-h-[100vh]'
                       }`}
                     />
-                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition-opacity duration-300 overlay" />
+                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition-opacity duration-300 overlay " />
                     <div className="absolute bottom-0 left-0 right-0 p-4 text-white opacity-0 group-hover:opacity-100 transform translate-y-full group-hover:translate-y-0 transition-all duration-300 bg-gradient-to-t from-black/70 to-transparent">
                       <h3 className="text-lg font-light">{image.title}</h3>
                       <p className="text-sm opacity-75">{image.category}</p>
